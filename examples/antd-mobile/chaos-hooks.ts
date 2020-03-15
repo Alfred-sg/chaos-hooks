@@ -1,0 +1,1 @@
+export { useForm } from '../../dist/index.umd.js';
