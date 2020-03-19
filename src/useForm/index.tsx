@@ -1,32 +1,42 @@
-import React, { Component, useRef, useState, useLayoutEffect, Fragment } from 'react';
+import React, { Component, useRef, useState, useLayoutEffect, Fragment, useEffect } from 'react';
 import Validator, { ValidateSource, Rules, ErrorList } from 'async-validator';
 import { FieldMeta, Errors } from '@/useForm/types';
 
+class VirtualField extends Component<any> {
+  componentWillUnmount(){
+    const { onDestroy } = this.props;
+    onDestroy && onDestroy();
+  }
+
+  render(){
+    const { setFieldRef } = this.props;
+    return <i ref={(ref: any) => { if (ref) setFieldRef(ref) }} />;
+  }
+}
+
 const useForm = () => {
-  const fieldsMeta = { } as { [key: string]: FieldMeta };
+  const fieldsMeta = useRef<{ [key: string]: FieldMeta }>({});
   const [fields, setFields] = useState<ValidateSource>({});
   const [errors, setErrors] = useState<Errors>({});
+  const [shouldFlushState, setShouldFlushState] = useState<boolean>(false);
 
-  useLayoutEffect(() => {
-    console.log(fieldsMeta)
-    const newFields: ValidateSource = {};
-    const newErrors: Errors = {};
-    getFieldsName().map(name => {
-      newFields[name] = fields[name];
-      newErrors[name] = errors[name];
-    });
-    setFields(newFields);
-    setErrors(newErrors);
-  }, [])
+  /**
+   * 利用 useEffect 刷新 state，willUnmount 中取得的 state 为历史数据（闭包引起）
+   * 但这样做会造成两次渲染
+   */
+  useEffect(() => {
+    if (shouldFlushState){
+      setFields(getFieldsValue());
+      setErrors(getFieldsError());
+    }
+  }, [shouldFlushState]);
 
   const registerField = (name: string, meta: FieldMeta) => {
-    console.log(name);
-    if (fieldsMeta) fieldsMeta[name] = meta;
+    fieldsMeta.current[name] = meta;
   }
 
   const unRegisterField = (name: string) => {
-    console.log(fields);
-    delete fieldsMeta[name];
+    delete fieldsMeta.current[name];
     delete fields[name];
     setFields(fields);
     delete errors[name];
@@ -34,16 +44,16 @@ const useForm = () => {
   }
 
   const getFieldsName = (names?: string[]) => {
-    return names ? names : Object.keys((fieldsMeta || {}));
+    return names ? names : Object.keys((fieldsMeta.current || {}));
   }
 
   const setFieldMeta = (name: string, key: string, value: any) => {
-    if ( !fieldsMeta[name] ) fieldsMeta[name] = {};
-    fieldsMeta[name][key] = value;
+    if ( !fieldsMeta.current[name] ) fieldsMeta.current[name] = {};
+    fieldsMeta.current[name][key] = value;
   }
 
   const getFieldMeta = (name: string, key?: string) => {
-    const meta = fieldsMeta[name];
+    const meta = fieldsMeta.current[name];
     if (key) return meta[key];
     return meta;
   }
@@ -103,7 +113,6 @@ const useForm = () => {
   }
 
   const getFieldDecorator = (name: string, meta: FieldMeta = {} as FieldMeta) => {
-    console.log(meta);
     registerField(name, meta);
     const { 
       initialValue, 
@@ -136,14 +145,23 @@ const useForm = () => {
   
       const originMethod = props[validateTrigger];
       props[validateTrigger] = (val: any) => {
-        console.log(val);
         originMethod && originMethod(val);
         validateField(name, val);
       };
 
+      const onDestroy = () => {
+        if (!shouldFlushState){
+          setShouldFlushState(true);
+          delete fieldsMeta.current[name];
+        };
+      }
+
       return (
         <Fragment>
-          <i ref={(ref: any) => { setFieldMeta(name, 'fieldRef', ref) }} />
+          <VirtualField 
+            onDestroy={onDestroy}
+            setFieldRef={(ref: any) => { setFieldMeta(name, 'fieldRef', ref) }}
+          />
           {React.cloneElement(inst, props)}
         </Fragment>
       );
@@ -157,9 +175,23 @@ const useForm = () => {
     if (window.scrollY > offsetTop) window.scrollTo(0, offsetTop);
   }
 
-  const getFieldsValue = () => fields;
+  const getFieldsValue = () => {
+    const values: ValidateSource = {};
+    const names = getFieldsName();
+    names.forEach(name => {
+      values[name] = fields[name];
+    })
+    return values;
+  }
   const getFieldValue = (name: string) => fields[name];
-  const getFieldsError = () => errors;
+  const getFieldsError = () => {
+    const errs: Errors = {};
+    const names = getFieldsName();
+    names.forEach(name => {
+      errs[name] = errors[name];
+    })
+    return errs;
+  };
   const getFieldError = (name: string) => errors[name] || [];
   const setFieldsValue = (vals: ValidateSource) => {
     setFields({
