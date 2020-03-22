@@ -17,5 +17,6 @@ node_modules/
 /example
 /docs
 /coverage
+/gh-pages
 /.docz
 .skywalker.json

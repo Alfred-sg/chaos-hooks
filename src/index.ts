@@ -1,5 +1,13 @@
-export { default as useFetch } from './useFetch';
-export { default as useForm } from './useForm';
-export { default as useModal } from './useModal';
-export { default as useTable } from './useTable';
-export { setLogger as logger } from './logger';
+import { setLogger } from './logger';
+import useFetch from './useFetch';
+import useForm from './useForm';
+import useModal from './useModal';
+import useTable from './useTable';
+
+export {
+  setLogger,
+  useFetch,
+  useForm,
+  useModal,
+  useTable,
+}

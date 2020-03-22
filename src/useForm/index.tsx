@@ -188,9 +188,9 @@ const useForm = (options?: Options) => {
    * @param name 
    * @param value 
    */
-  const validateField = useCallback((name: string, value: any): Promise<Fields> => {
+  const validateField = useCallback((name: string, value?: any): Promise<Fields> => {
     return _validate([name], {
-      [name]: value,
+      [name]: value !== undefined ? value : getFieldValue(name),
     });
   }, [fieldsMeta, fields, errors]);
 
@@ -434,6 +434,7 @@ const useForm = (options?: Options) => {
     setFieldValue,
     setFieldsValue,
     resetFields,
+    validateField,
     validateFields,
     isFormChanged,
     isFieldTouched,

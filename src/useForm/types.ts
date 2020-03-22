@@ -40,6 +40,7 @@ export interface Form {
   setFieldValue: (name: string, value: any) => void;
   setFieldsValue: (vals: Fields) => void;
   resetFields: () => void;
+  validateField: (name: string, value?: any) => Promise<Fields>;
   validateFields: (names?: string[]) => Promise<Fields>;
   isFormChanged: () => boolean;
   isFieldTouched: (name: string) => boolean;

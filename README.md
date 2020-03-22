@@ -1,10 +1,33 @@
 # chaos-hooks
 
-## Usage
+## ✨ Features
 
-```sh
-umi block https://github.com//tree/master/chaos-hooks
+* useFetch 远程处理。
+* useForm 处理表单。
+* useModal 处理模态框。
+* useTable 处理表格。
+* [TODO] 按需加载。
+
+## 📦 Install
+
 ```
+npm i chaos-hooks --save
+```
+
+## 🔨 Usage
+
+```
+import { useFetch } from 'chaos-hooks';
+```
+
+## 🖥 Development
+
+```
+$ git clone https://github.com/Alfred-sg/chaos-hooks
+$ npm install
+$ npm run docs
+```
+打开浏览器访问 http://127.0.0.1:8000。
 
 ## useForm
 
