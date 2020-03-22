@@ -16,7 +16,8 @@
     "cov": "father test --coverage",
     "docs": "dumi dev",
     "site": "dumi build",
-    "pub": "cnpm run test & cnpm run build & npm publish"
+    "pub": "cnpm run test & cnpm run build & npm publish",
+    "deploy": "cnpm run site & gh-pages -d dist"
   },
   "peerDependencies": {
     "react": "16.x"

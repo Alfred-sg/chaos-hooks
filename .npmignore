@@ -16,6 +16,7 @@ node_modules/
 /.vscode/
 /example
 /docs
+/mds
 /coverage
 /gh-pages
 /.docz

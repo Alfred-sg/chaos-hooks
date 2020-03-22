@@ -1,6 +1,5 @@
 export default {
-  outputPath: 'gh-pages',
-  mode: 'site',
+  mode: 'docs',
   extraBabelPlugins: [
     [
       'import',
@@ -11,4 +10,7 @@ export default {
       },
     ]
   ],
+  resolve: {
+    includes: ['mds'],
+  }
 };
