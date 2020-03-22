@@ -43,7 +43,7 @@ export default ({
           placeholder="请输入验证码"
           maxLength={4}
           {...rest}
-          error={!!getFieldError(name).length}
+          error={!!getFieldError(name)}
         />
       )}
     </FormItem>

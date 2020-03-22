@@ -24,7 +24,7 @@ export default ({
 }) => {
   const {
     getFieldDecorator,
-    setFieldsValue,
+    setFieldValue,
     getFieldValue,
   } = useContext(Context);
   const value = getFieldValue(name);
@@ -35,13 +35,9 @@ export default ({
    */
   const onChange = (val: any) => {
     if (Array.isArray(val) && val.length){
-      setFieldsValue({
-        [name]: val[0]
-      })
+      setFieldValue(name, val[0], true)
     } else {
-      setFieldsValue({
-        [name]: val
-      })
+      setFieldValue(name, val, true)
     }
   }
 

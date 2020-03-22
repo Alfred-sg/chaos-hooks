@@ -24,7 +24,6 @@ export default ({
     getFieldError,
   } = useContext(Context);
   const errors = getFieldError(name);
-  const hasError = !!errors.length;
 
   return (
     <div className={className}>
@@ -41,7 +40,7 @@ export default ({
       >
           {children}
       </List>
-      {hasError ? (
+      {errors ? (
         <span className={styles.error}>{errors.join(',')}</span>
         ) : null}
         </WingBlank>

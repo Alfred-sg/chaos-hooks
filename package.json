@@ -11,18 +11,25 @@
   "repository": "/chaos-hooks",
   "scripts": {
     "dev": "father doc dev",
-    "build": "father build"
+    "build": "father build",
+    "test": "father test",
+    "cov": "father test --coverage"
   },
   "peerDependencies": {
     "react": "16.x"
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.2.1",
+    "@types/jest": "^25.1.4",
+    "@types/lodash": "^4.14.149",
     "@umijs/hooks": "^1.6.2",
+    "enzyme": "^3.11.0",
     "father": "^2.29.2",
     "typescript": "^3.3.3"
   },
   "license": "MIT",
   "dependencies": {
-    "async-validator": "^3.2.4"
+    "async-validator": "^3.2.4",
+    "lodash": "^4.17.15"
   }
 }

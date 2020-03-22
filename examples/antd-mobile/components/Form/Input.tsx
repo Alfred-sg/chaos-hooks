@@ -128,7 +128,7 @@ export default ({
           maxLength={30}
           {...rest}
           {...extraProps}
-          error={!!getFieldError(name).length}
+          error={!!getFieldError(name)}
         />,
       )}
     </FormItem>

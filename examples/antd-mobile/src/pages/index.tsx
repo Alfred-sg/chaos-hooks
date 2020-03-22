@@ -6,7 +6,7 @@ import styles from './index.less';
 
 export default () => {
   const form = useForm();
-  const { getFieldValue, getFieldsValue } = form;
+  const { getFieldValue, getFieldsValue, getFieldsError } = form;
   const onClick = () => {
     form.validateFields().then(vals => {
       console.log(vals)
@@ -15,12 +15,14 @@ export default () => {
     })
   }
 
+  console.log(form);
   console.log(getFieldsValue());
+  console.log(getFieldsError());
 
   return (
     <div>
       <Form form={form}>
-        <Input name='name' label="姓名" />
+        <Input name='name' label="姓名" initialValue="test" />
         <Select name='sex' label="性别" 
           options={[{label: '男', value: 'male'}, {label: '女', value: 'female'}]} 
         />
