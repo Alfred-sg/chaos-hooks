@@ -1,28 +1,32 @@
 {
   "name": "chaos-hooks",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "authors": {
-    "name": "",
-    "email": ""
+    "name": "alfred",
+    "email": "sc941203@foxmail.com"
   },
-  "repository": "/chaos-hooks",
+  "repository": "https://github.com/Alfred-sg/chaos-hooks",
   "scripts": {
     "dev": "father doc dev",
     "build": "father build",
     "test": "father test",
-    "cov": "father test --coverage"
+    "cov": "father test --coverage",
+    "docs": "dumi dev",
+    "site": "dumi build"
   },
   "peerDependencies": {
     "react": "16.x"
   },
   "devDependencies": {
+    "@testing-library/react": "^10.0.1",
     "@testing-library/react-hooks": "^3.2.1",
     "@types/jest": "^25.1.4",
     "@types/lodash": "^4.14.149",
     "@umijs/hooks": "^1.6.2",
+    "dumi": "^1.0.10",
     "enzyme": "^3.11.0",
     "father": "^2.29.2",
     "typescript": "^3.3.3"

@@ -1,5 +1,4 @@
 interface Logger {
-  enableLogger?: boolean,
   log?: Function,
   success?: Function,
   fail?: Function,
@@ -8,12 +7,9 @@ interface Logger {
 
 let logger: Logger = {
   log: console.log,
+  success: console.log,
   fail: console.warn,
 };
-
-export const enableLogger = (enable: boolean) => {
-  logger.enableLogger = enable;
-}
 
 export const setLogger = (logger: Logger) => {
   logger = logger;

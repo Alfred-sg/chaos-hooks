@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import useFetch from '@/useFetch';
-import * as logger from '@/logger';
-import { Params, Options, TableFetch } from '@/useTable/types';
+import useFetch from '../../useFetch';
+import * as logger from '../../logger';
+import { Params, Options, TableFetch } from '../types';
 
 const useFetchInTable = (
   request: (...args: any[]) => Promise<any>, 
@@ -13,6 +13,7 @@ const useFetchInTable = (
     enableSuccessLog,
     enableFailLog = true,
     transfrom,
+    transfromParams,
   } = options;
 
   const [params, setParams] = useState<Params>({
@@ -43,9 +44,10 @@ const useFetchInTable = (
       pageSize: params.pageSize,
       ...pms,
     };
+    const newParamsTransformed = transfromParams ? transfromParams(newParams) : newParams;
 
-    setParams(newParams);
-    return fetch(newParams);
+    setParams(newParamsTransformed);
+    return fetch(newParamsTransformed);
   }
 
   /**
@@ -57,9 +59,10 @@ const useFetchInTable = (
       ...params,
       ...pms,
     };
+    const newParamsTransformed = transfromParams ? transfromParams(newParams) : newParams;
 
-    setParams(newParams);
-    return fetch(newParams);
+    setParams(newParamsTransformed);
+    return fetch(newParamsTransformed);
   }
 
   /**
@@ -67,7 +70,7 @@ const useFetchInTable = (
    */
   const reset = () => {
     setParams(defaultParams);
-    fetch(defaultParams);
+    return fetch(defaultParams);
   }
 
   return {

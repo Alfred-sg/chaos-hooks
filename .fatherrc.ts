@@ -6,7 +6,7 @@ const options: IBundleOptions = {
     globals: {
       'react': 'React',
     }
-  },
+  }
 };
 
 export default options;

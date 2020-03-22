@@ -10,7 +10,7 @@
     "baseUrl": ".",
     "strict": true,
     "paths": {
-      "@/*": ["src/*"]
+      "chaos-hooks": ["./src"]
     },
     "allowSyntheticDefaultImports": true
   }

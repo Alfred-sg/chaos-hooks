@@ -26,22 +26,20 @@ export interface Options {
 }
 
 export interface Form {
-  registerField: (name: string) => void;
+  registerField: (name: string, meta?: FieldMeta) => void;
   unRegisterField: (name: string) => void;
   setFieldMeta: (name: string, key: string | any, value?: any) => void;
   getFieldMeta: (name: string, key?: string) => any;
   getFieldDecorator: (name: string, meta: FieldMeta) => (inst: React.ReactElement) => React.ReactElement;
-  setFieldRef: (name: string, ref: any) => void;
   getFieldRef: (name: string) => any;
   getFieldsValue: () => Fields;
   getFieldValue: (name: string) => any;
   getFieldInitialValue: (name: string) => any;
   getFieldsError: () => Errors;
   getFieldError: (name: string) => undefined | string[];
-  setFieldValue: (name: string, value: any, touched?: boolean) => void;
+  setFieldValue: (name: string, value: any) => void;
   setFieldsValue: (vals: Fields) => void;
   resetFields: () => void;
-  validateField: (name: string) => Promise<Fields>;
   validateFields: (names?: string[]) => Promise<Fields>;
   isFormChanged: () => boolean;
   isFieldTouched: (name: string) => boolean;

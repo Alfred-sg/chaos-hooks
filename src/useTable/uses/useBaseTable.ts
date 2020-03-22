@@ -75,10 +75,7 @@ const useBaseTable = (
     research({
       current,
       pageSize,
-      orderConditions: sorter ? [{
-        fieldName: sorter.field,
-        sortType: sorter.order,
-      }] : undefined,
+      sorter: sorter ? sorter : undefined,
     })
   }
 

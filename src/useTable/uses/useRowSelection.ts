@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Table } from '@/useTable/types';
+import { Table } from '../types';
 
 /**
  * 添加复选框功能

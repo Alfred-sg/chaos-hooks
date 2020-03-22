@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Options } from './types';
 
 const useFetch = (request: (...args: any[]) => Promise<any>, options?: Options) => {
@@ -9,15 +9,19 @@ const useFetch = (request: (...args: any[]) => Promise<any>, options?: Options) 
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState();
 
-  const fetch = (...args: any[]) => {
-    setLoading(true);
+  const fetch = useCallback((...args: any[]) => {
+    if (!loading) setLoading(true);
     return request(...args).then((res: any) => {
-      setLoading(false);
+      if (loading)  setLoading(false);
       setData(res);
     })
-  }
+  }, []);
 
-  if (!manual) fetch();
+  if (!manual){
+    useEffect(() => {
+      fetch();
+    }, []);
+  }
 
   return {
     fetch,

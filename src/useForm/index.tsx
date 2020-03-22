@@ -3,7 +3,7 @@ import Validator, { Rules, ValidateOption, ErrorList } from 'async-validator';
 import set from 'lodash/set';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
-import { FieldMeta, Fields, Errors, Options } from '@/useForm/types';
+import { FieldMeta, Fields, Errors, Options } from './types';
 
 const VirtualField = ({
   unRegisterField,
@@ -48,8 +48,8 @@ const useForm = (options?: Options) => {
    * @param name 
    * @param meta 
    */
-  const registerField = useCallback((name: string, meta: FieldMeta) => {
-    setFieldMeta(name, meta);
+  const registerField = useCallback((name: string, meta?: FieldMeta) => {
+    setFieldMeta(name, meta || {});
 
     return () => {
       unRegisterField(name);
@@ -116,7 +116,7 @@ const useForm = (options?: Options) => {
    * 校验字段，内部
    * @param names 
    */
-  const _validate = useCallback((names?: string[], vals?: Fields, validateOption?: ValidateOption) => {
+  const _validate = useCallback((names?: string[], vals?: Fields, validateOption?: ValidateOption): Promise<Fields> => {
     const fieldsName = getFieldsName(names);// 平铺结构
     const values: Fields = vals ? vals : {};
     const rules: Rules = {};
@@ -172,7 +172,7 @@ const useForm = (options?: Options) => {
    * 校验字段
    * @param names 
    */
-  const validateFields = useCallback((names?: string[], validateOption?: ValidateOption) => {
+  const validateFields = useCallback((names?: string[], validateOption?: ValidateOption): Promise<Fields> => {
     const values: Fields = {};
     if (names){
       getFieldsName(names).forEach((name: string) => {
@@ -188,7 +188,7 @@ const useForm = (options?: Options) => {
    * @param name 
    * @param value 
    */
-  const validateField = useCallback((name: string, value: any) => {
+  const validateField = useCallback((name: string, value: any): Promise<Fields> => {
     return _validate([name], {
       [name]: value,
     });
@@ -221,7 +221,7 @@ const useForm = (options?: Options) => {
         [trigger]: (...args: any[]) => {
           instProps[trigger] && instProps[trigger](...args);
           const value = getValueFromEvent ? getValueFromEvent(...args) : args[0];
-          setFieldValue(name, value, true);
+          setFieldValue(name, value);
         }
       };
   
@@ -422,7 +422,6 @@ const useForm = (options?: Options) => {
   return {
     registerField,
     unRegisterField,
-    setFieldRef,
     setFieldMeta,
     getFieldMeta,
     getFieldDecorator,

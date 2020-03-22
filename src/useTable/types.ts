@@ -13,16 +13,17 @@ export interface Params {
 export type DataSource = { [key: string]: any }[];
 
 export interface Options {
-  defaultParams?: any,
-  useFetchOptions?: UseFetchOptions,
-  enableRowSelection?: boolean,
-  enableFakePagination?: boolean,
-  enableSuccessLog?: boolean,
-  enableFailLog?: boolean,
-  transfrom?: (data: any, pagination?: Pagination) => {
+  defaultParams?: any;// 默认参数
+  useFetchOptions?: UseFetchOptions;// useFetch 配置
+  enableRowSelection?: boolean;// 开启选择
+  enableFakePagination?: boolean;// 开启伪分页
+  enableSuccessLog?: boolean;// 开启成功日志
+  enableFailLog?: boolean;// 开启失败日志
+  transfrom?: (data: any, pagination?: Pagination) => {// 转换响应
     pagination: Pagination,
     list: DataSource,
   };
+  transfromParams?: (params: any) => any;// 转换请求
 }
 
 interface TableProps {
