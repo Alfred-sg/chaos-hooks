@@ -1,5 +1,6 @@
 export default {
-  mode: 'docs',
+  outputPath: 'docs',
+  mode: 'site',
   extraBabelPlugins: [
     [
       'import',
