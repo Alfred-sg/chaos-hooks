@@ -5,8 +5,15 @@ const options: IBundleOptions = {
     name: 'chaosHooks',
     globals: {
       'react': 'React',
-    }
-  }
+    },
+  },
+  esm: {
+    type: "rollup",
+    importLibToEs: true,
+  },
+  cjs: {
+    type: "rollup",
+  },
 };
 
 export default options;

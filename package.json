@@ -1,6 +1,6 @@
 {
   "name": "chaos-hooks",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -11,7 +11,7 @@
   "repository": "https://github.com/Alfred-sg/chaos-hooks",
   "scripts": {
     "dev": "father doc dev",
-    "build": "father build",
+    "build": "father build --file",
     "test": "father test",
     "cov": "father test --coverage",
     "docs": "dumi dev",
