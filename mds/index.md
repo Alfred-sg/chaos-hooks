@@ -13,6 +13,7 @@ hero:
 
 * useFetch 远程处理。
 * useForm 处理表单。
+* useList 处理列表。
 * useModal 处理模态框。
 * useTable 处理表格。
 
