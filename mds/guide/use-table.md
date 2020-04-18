@@ -289,7 +289,6 @@ useTable 参数。
 | options.transfrom | (data: any, pagination) => { pagination, list } | undefined | 转换响应 |
 | options.transfromParams | (params) => any | undefined | 转换请求 |
 
-
 ## apis
 
 | 方法 | 类型 | 意义 |
