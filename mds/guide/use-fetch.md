@@ -45,7 +45,6 @@ export default () => {
     dataIndex: 'phone',
   }];
 
-console.log(data);
   return <Table columns={columns} dataSource={data} loading={loading} />
 }
 ```
@@ -102,7 +101,7 @@ const { loading, data, fetch: submit } = useFetch((data) => {
 
 useFetch 参数。
 
-| 属性 | 类型 | 默认值 |
-| :- | :-: | -: |
-| request | (params: any) => Promise | undefined |
-| options.manual | boolean | false |
+| 属性 | 类型 | 默认值 | 意义 |
+| :- | :-: | -: | -: |
+| request | (params: any) => Promise | undefined | 请求方法 |
+| options.manual | boolean | false | 是否手动触发 |

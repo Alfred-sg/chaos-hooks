@@ -11,9 +11,15 @@ const useFetch = (request: (...args: any[]) => Promise<any>, options?: Options) 
 
   const fetch = useCallback((...args: any[]) => {
     if (!loading) setLoading(true);
-    return request(...args).then((res: any) => {
-      if (loading)  setLoading(false);
-      setData(res);
+    return new Promise((resolve, reject) => {
+      request(...args).then((res: any) => {
+        setLoading(false);
+        setData(res);
+        resolve(res);
+      }).catch(err => {
+        setLoading(false);
+        reject(err);
+      })
     })
   }, []);
 

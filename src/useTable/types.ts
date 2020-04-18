@@ -30,7 +30,7 @@ interface TableProps {
   dataSource: DataSource,
   pagination?: Pagination | boolean,
   loading?: boolean,
-  onChange?: (pagination: Pagination, sorter: {
+  onChange?: (pagination: Pagination, filters: { [key: string]: any[] }, sorter: {
     field: string,
     order: string,
   }) => void,
@@ -45,6 +45,7 @@ export interface Table {
   search: (...args: any[]) => Promise<any>,
   research: (...args: any[]) => Promise<any>,
   reset: () => void,
+  getSelectedRowKeys?: () => string[];
   clearSelectedRowKeys?: () => void,
 }
 

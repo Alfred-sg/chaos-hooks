@@ -16,6 +16,10 @@ const useRowSelection = (table: Table) => {
     onChange: onSelectionChange,
   }
 
+  table.getSelectedRowKeys = () => {
+    return selectedRowKeys;
+  }
+
   table.clearSelectedRowKeys = () => {
     setSelectedRowKeys([]);
   }

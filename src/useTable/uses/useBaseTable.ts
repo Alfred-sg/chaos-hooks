@@ -53,7 +53,7 @@ const useBaseTable = (
     }
   });
 
-  const onChange = (pagination: Pagination, sorter: {
+  const onChange = (pagination: Pagination, filters: { [key: string]: any[] }, sorter: {
     field: string,
     order: string,
   }) => {
@@ -76,6 +76,7 @@ const useBaseTable = (
       current,
       pageSize,
       sorter: sorter ? sorter : undefined,
+      filters: filters ? filters : undefined,
     })
   }
 

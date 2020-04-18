@@ -6,7 +6,7 @@
 * useForm 处理表单。
 * useModal 处理模态框。
 * useTable 处理表格。
-* [TODO] 按需加载。
+* 基于 tree-shaking 按需加载。
 
 ## 📦 Install
 
